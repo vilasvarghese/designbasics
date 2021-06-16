@@ -1,0 +1,64 @@
+    public interface IShape
+    {
+        int Width { get; set}
+        double GetArea();         
+    }
+
+    public class Sqaure :IShape
+    {
+        private int width;
+        public Sqaure() 
+        {            
+        }
+
+        public int Width
+        {
+            get            {                return width;            }
+            set            {                width = value;            }        
+        }
+
+        public double GetArea()
+        {
+            double area = Width * Width;           
+            return area;
+        }       
+    }
+
+    public class Circle : IShape
+    {       
+        private int width;
+        public Circle()
+        {          
+        }
+
+        public int Width
+        {
+            get            {                return width;            }
+            set            {                width = value;            }        
+        }
+
+        public double GetArea()
+        {
+            double area = Math.PI * (double)((double)Width / (double)2) * 
+                                     (double)((double)Width / (double)2);           
+            return area;
+        }       
+    }
+
+    public interface IAreaCalculator
+    {
+        double CalculateArea(IList<IShape> shapes);
+    }  
+
+    public class AreaCalculator: IAreaCalculator
+    {
+        public double CalculateArea(IList<IShape> shapes)
+        {
+            double totalArea = 0;
+            foreach (IShape shape in shapes)
+            {
+                totalArea += shape.GetArea();
+            }
+            return totalArea;
+        }
+    }

@@ -1,0 +1,79 @@
+public interface IShape
+    {
+        int Width { get; set; }
+        double GetArea();
+        double GetVolume();
+    }
+
+    public class Sqaure : IShape
+    {
+        private int width;
+        public Sqaure()
+        {
+        }
+
+        public int Width
+        {
+            get { return width; }
+            set { width = value; }
+        }
+
+        public double GetArea()
+        {
+            double area = Width * Width;
+            return area;
+        }
+
+        public double GetVolume()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class Cube : IShape
+    {
+        private int width;
+        public int Width
+        {
+            get { return width; }
+            set { width = value; }
+        }
+
+        public double GetArea()
+        {
+            return 6 * Width * Width;
+        }
+
+        public double GetVolume()
+        {
+            return Width * Width * Width;
+        }        
+    }
+
+    public interface IVolumeCalculator
+    {
+        double CalculateVolume(IList<IShape> shapes);
+    }
+
+    public class VolumeCalculator : IVolumeCalculator
+    {
+        public double CalculateVolume(IList<IShape> shapes)
+        {
+            double totalVolume = 0;
+            foreach (var shape in shapes)
+            {
+                totalVolume += shape.GetVolume();
+            }
+            return totalVolume;
+        }
+    }
+	
+/*
+We have decided to add more shapes to our system. Please check the above C# code. But these shapes are three dimensional. These shapes  can have Volume apart from the area. I have added a new method to IShape interface named GetVolume.
+
+I have created a new shape named Cube which derived from IShape. We have a new class named VolumeCalculator which calculates the total volume of all the shapes.
+
+But since we have added new method to IShape interface, we have to implement the method to existing shapes. As I have done for Square, but it is not implemented.
+
+Now if the collection which are sending to the VolumeCalculator contains any of the 2D shapes, it will throw a NotSupportedException for them. This is the violation of LSP in SOLID design principles.
+*/	

@@ -1,0 +1,61 @@
+/*
+Class with Short comings
+*/
+
+public class Shape
+    {
+        //TODO add more shapes if needed
+        public const int SQUARE = 1;
+        public const int CIRCLE = 2;
+        public const int EQUILATERAL_TRIANGLE = 3;
+        private readonly double width;
+        public int type = -1;
+
+        public Shape(int type, double width)
+        {
+            this.type = type;
+            this.width = width;
+        }
+
+        public double getArea()
+        {
+            switch (type)
+            {
+                case SQUARE:
+                    return width * width;
+                case CIRCLE:
+                    return Math.PI * (width / 2) * (width / 2);
+                case EQUILATERAL_TRIANGLE:
+                    return (Math.Sqrt(3) / 4) * width * width;
+            }
+            throw new SystemException("Can`t compute area of unknown shape");
+        }
+
+        public static double CalculateTotalArea(List<Shape> shapes)
+        {
+            double totalArea = 0;
+            foreach (var shape in shapes)
+            {
+                for (int i = 0; i < shapes.Count; i++)
+                {
+                    if (shapes[i].type == SQUARE)
+                    {
+                        totalArea += shapes[i].getArea();
+                    }
+                    if (shapes[i].type == CIRCLE)
+                    {
+                        totalArea += shapes[i].getArea();
+                    }
+                    if (shapes[i].type == EQUILATERAL_TRIANGLE)
+                    {
+                        totalArea += shapes[i].getArea();
+                    }
+                }
+            }
+            return totalArea;
+        }
+    }
+	
+/*
+Though there are many short coming in this class. But what is the basic shortcoming which you can see. For every shape added we have to change the GetArea() method as well as the CalculateTotalArea() method. There are many reason for the class to change. It means the class is violating the SRP.
+*/

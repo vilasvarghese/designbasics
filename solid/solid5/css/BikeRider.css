@@ -1,0 +1,27 @@
+    public class BikeRider : IRider
+    {
+        Bike b = new Pulzar180();
+		public void drive()
+        {
+			//simple implementation
+			b.start();
+			b.drive();
+        }
+    }
+	
+	
+	/*DIP*/
+	public class BikeRider : IRider
+    {
+        Bike b;
+		public void setBike(Bike b1)
+		{
+			b = b1;
+		}
+		public void drive()
+        {
+			//simple implementation
+			b.start();
+			b.drive();
+        }
+    }
